@@ -9,3 +9,11 @@
     - name: Print the result
       debug: var=rs_hostname.stdout
 
+    - name: Test SSH
+      command: ssh 127.0.0.1 hostname
+      register: rs_ssh_hostname
+      ignore_errors: yes
+
+    - name: Print the result of SSH
+      debug: var=rs_ssh_hostname.stdout
+

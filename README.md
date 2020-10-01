@@ -10,3 +10,10 @@ docker-compose run --rm ansible ansible-playbook pb.test.yml
 
 
 
+## Build Test
+
+```
+docker-compose -f docker-compose.test.yml build
+docker-compose -f docker-compose.test.yml run --rm sut
+```
+

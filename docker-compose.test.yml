@@ -7,5 +7,5 @@ services:
     command: ansible-playbook pb.test.yml 
     volumes:
       - ./playbook:/playbook
-      - ~/.ssh:/root/.ssh
+      - ./ssh:/root/.ssh
 
