@@ -1,0 +1,11 @@
+---
+# https://docs.docker.com/docker-hub/builds/automated-testing/
+version: "3.6"
+services:
+  sut:
+    build: .
+    command: ansible-playbook pb.test.yml 
+    volumes:
+      - ./playbook:/playbook
+      - ~/.ssh:/root/.ssh
+

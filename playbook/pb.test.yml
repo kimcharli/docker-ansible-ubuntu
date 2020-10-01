@@ -1,0 +1,11 @@
+---
+# playbook for test image 
+- hosts: localhost
+  tasks:
+    - name: Get hostname
+      command: hostname
+      register: rs_hostname
+
+    - name: Print the result
+      debug: var=rs_hostname.stdout
+
