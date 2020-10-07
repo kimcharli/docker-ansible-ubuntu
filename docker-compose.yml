@@ -1,4 +1,5 @@
 ---
+# usage: docker-compose run --rm ansible ansible-playbook pb.test.yml 
 version: "3.6"
 services:
   ansible:
