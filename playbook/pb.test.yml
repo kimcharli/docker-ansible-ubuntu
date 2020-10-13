@@ -2,7 +2,7 @@
 # playbook for test image 
 - hosts: localhost
   vars:
-    ip1: '192.168.1.31/24'
+    ip1: '192.168.1.31/24'  # for nataddr test
   tasks:
     - name: Get hostname
       command: hostname
@@ -25,3 +25,35 @@
     
     - name: netaddr netwokr output
       debug: var=ip1_net
+
+    - name: Test SSH with Password
+      block:
+        - name: Add host for password test
+          add_host:
+            name: test-password-host
+            ansible_host: 127.0.0.1
+            ansible_user: test-user
+            ansible_password: test-pass
+
+        - name: Test ssh with password
+          block:
+            - name: Run command to check ssh. The connection is supposed to be rejected.
+              command: /bin/true
+              ignore_unreachable: yes
+              register: do_password_ssh
+              failed_when:
+                - '"failed" in do_password_ssh'
+                - '"sshpass" in do_password_ssh.msg'
+
+            - name: Test following 
+              debug: var=ansible_host
+          delegate_facts: true
+          delegate_to: test-password-host
+
+      tags: ssh_pass_test
+
+
+
+
+
+
